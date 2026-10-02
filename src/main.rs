@@ -11,6 +11,12 @@ use tokio::sync::mpsc;
 
 const USAGE: &str = "Usage: hyper-top [--config PATH] [--theme default|solarized|midnight|tokyo-night|catppuccin|nord|dracula|gruvbox] [--refresh 900] [--limit 80] [--sort cpu|memory|name|pid|threads] [--filter QUERY] [--show-full-command|--hide-full-command] [--compact|--no-compact] [--import PATH] [--export PATH]";
 
+const SUPPORT_LINE: &str = "Support this project: https://marcfors.com/donate?from=hyper-top";
+
+fn help_text() -> String {
+    format!("{USAGE}\n\n{SUPPORT_LINE}")
+}
+
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args: Vec<String> = std::env::args().skip(1).collect();
@@ -19,7 +25,7 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
         return Ok(());
     }
     if args.iter().any(|arg| arg == "--help" || arg == "-h") {
-        println!("{USAGE}");
+        println!("{}", help_text());
         return Ok(());
     }
 
@@ -78,4 +84,20 @@ async fn main() -> Result<(), Box<dyn std::error::Error>> {
     }
 
     Ok(())
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn help_text_has_single_support_line() {
+        let help = help_text();
+        assert!(help.starts_with("Usage: hyper-top"));
+        assert_eq!(
+            help.matches("Support this project: https://marcfors.com/donate?from=hyper-top")
+                .count(),
+            1
+        );
+    }
 }
