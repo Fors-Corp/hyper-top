@@ -1,5 +1,7 @@
 # hyper-top
 
+[![Support · 1,99 €](https://img.shields.io/badge/Support-1%2C99_%E2%82%AC-2f855a)](https://marcfors.com/donate?from=hyper-top)
+
 `hyper-top` is a terminal-first system monitor and process dashboard built with Rust, `ratatui`, and `sysinfo`.
 
 It provides:
@@ -232,3 +234,7 @@ These launch the app in a terminal window and prefer the installed `hyper-top` c
 - The app expects a real terminal and does not work like a GUI window in a non-terminal environment.
 - The config file can be JSON or TOML; TOML is the easiest for manual editing.
 - If a config file is not found, the app falls back to built-in defaults.
+
+## Support
+
+If this project is useful to you, you can [support it with 1,99 €](https://marcfors.com/donate?from=hyper-top).
